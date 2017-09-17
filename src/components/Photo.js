@@ -5,7 +5,6 @@
 //or this could just be done in anoth4er component that just has the tag list displayed as chips
 
 import React, {Component} from 'react';
-import Photoback from './Photoback';
 
 class Photo extends Component {
   constructor(props) {
@@ -13,12 +12,10 @@ class Photo extends Component {
     }
 
 
-
-
 render() {
   return (
     <div>
-    <img src={this.props.photo.url_s} />
+    <img src={this.props.photo.url_m} />
     </div>
   )
 }
