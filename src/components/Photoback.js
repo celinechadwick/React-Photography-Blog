@@ -7,15 +7,15 @@ class Photoback extends Component {
 
 render() {
   return (
-    <div>
+    <div onClick={()=>this.props.handleSwitchFront()}>
       <div>
-        {this.props.photo.title}
+        title: {this.props.photo.title}
       </div>
       <div>
-        {this.props.photo.description}
+        content: {this.props.photo.description.content}
       </div>
       <div>
-        {this.props.photo.tags}
+        tags: {this.props.photo.tags}
       </div>
     </div>
   )

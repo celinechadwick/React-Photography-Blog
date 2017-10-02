@@ -9,12 +9,20 @@ import React, {Component} from 'react';
 class Photo extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      toggled:false
     }
+  }
+
+  // testClick(){
+  //   console.log('hi from Photo.js')
+  //   console.log(this.props)
+  // }
 
 
 render() {
   return (
-    <div>
+    <div onClick={(e) => this.props.handleClick(e)}>
       <img src={this.props.photo.url_m} />
     </div>
   )
