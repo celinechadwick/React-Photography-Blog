@@ -5,6 +5,7 @@
 //or this could just be done in anoth4er component that just has the tag list displayed as chips
 
 import React, {Component} from 'react';
+const photoStyle= {'height':'500px', 'border':'1px solid'};
 
 class Photo extends Component {
   constructor(props) {
@@ -31,11 +32,10 @@ class Photo extends Component {
   //   console.log(this.props)
   // }
 
-
 render() {
   if (this.state.photoToggled) {
     return (
-        <div onClick={this.handleSwitchFront.bind(this)}>
+        <div onClick={this.handleSwitchFront.bind(this)} style={photoStyle}>
           <div>
             {this.props.photo.title}
           </div>
@@ -49,7 +49,7 @@ render() {
       )
     } else {
   return (
-    <div onClick={this.handleClick.bind(this)}>
+    <div onClick={this.handleClick.bind(this)} style={photoStyle}>
       <img src={this.props.photo.url_m} />
     </div>
   )
