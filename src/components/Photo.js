@@ -10,10 +10,22 @@ class Photo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggled:false
+      photoToggled:false
     }
   }
+  handleClick(e) {
+    console.log(e.target)
+  this.setState({photoToggled: !this.state.photoToggled});
+  console.log("clicked", this.props.photoToggled);
+  //when the photo front is clicked it should change phototoggled to true, thereby flipping the image back in the render
 
+  }
+
+  handleSwitchFront(event) {
+  this.setState({photoToggled: !this.state.photoToggled});
+  console.log("clicked", this.state.photoToggled);
+  //when the photoback is clicked it should change phototoggled to false, thereby flipping the image back in the render
+  }
   // testClick(){
   //   console.log('hi from Photo.js')
   //   console.log(this.props)
@@ -21,11 +33,27 @@ class Photo extends Component {
 
 
 render() {
+  if (this.state.photoToggled) {
+    return (
+        <div onClick={this.handleSwitchFront.bind(this)}>
+          <div>
+            {this.props.photo.title}
+          </div>
+          <div>
+            {this.props.photo.description.content}
+          </div>
+          <div>
+            {this.props.photo.tags}
+          </div>
+        </div>
+      )
+    } else {
   return (
-    <div onClick={(e) => this.props.handleClick(e)}>
+    <div onClick={this.handleClick.bind(this)}>
       <img src={this.props.photo.url_m} />
     </div>
   )
+}
 }
 
 
