@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Photo from './Photo';
 import PhotoBack from './Photoback';
-import Masonry from 'react-masonry-component';
+import {Row} from 'react-materialize';
 
 var masonryOptions = {
     transitionDuration: 0
@@ -48,14 +48,15 @@ render() {
 
   return (
     <div>
-
+      <div className= "row">
         {this.state.photos.map((photo) => {
             return (
-              <Photo key={photo.id} photo={photo}  className='grid-item'/>
+              <Photo key={photo.id} photo={photo}/>
                 )
 
 
         }) }
+      </div>
     </div>
     )
   }
