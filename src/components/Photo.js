@@ -5,7 +5,7 @@
 //or this could just be done in anoth4er component that just has the tag list displayed as chips
 
 import React, {Component} from 'react';
-import {Col, Card} from 'react-materialize';
+import {Col, Row} from 'react-materialize';
 const photobackStyle= {'height':'300px','border':'1px solid'};
 
 class Photo extends Component {
@@ -37,36 +37,22 @@ render() {
 
   if (this.state.photoToggled) {
     return (
-      <Col l={6} s={12}>
+      <Col s={12}>
         <div onClick={this.handleSwitchFront.bind(this)} style={photobackStyle}>
           <div>
             {this.props.photo.title}
           </div>
           <div>
-            {this.props.photo.description.content}
-          </div>
-          <div>
-            {this.props.photo.tags}
+            {this.props.photo.description._content}
           </div>
         </div>
       </Col>
       )
     } else {
   return (
-    <div className="col s12 m6">
-    <div className="card large">
-      <div className="card-image waves-effect waves-block waves-light">
-      <img className="activator" src={this.props.photo.url_m}/>
-    </div>
-    <div className="card-content">
-      <span className="card-title activator grey-text text-darken-4">{this.props.photo.title}<i className="material-icons right">more_vert</i></span>
-    </div>
-    <div className="card-reveal">
-      <span className="card-title grey-text text-darken-4">{this.props.photo.title}<i className="material-icons right">close</i></span>
-      <p>{this.props.photo.description.content}</p>
-    </div>
-    </div>
-    </div>
+    <Col s={12}>
+        <img src={this.props.photo.url_m} onClick={this.handleClick.bind(this)}/>
+    </Col>
   )
 }
 }

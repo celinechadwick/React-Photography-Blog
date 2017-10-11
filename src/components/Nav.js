@@ -4,7 +4,7 @@ import axios from 'axios';
 
 class Nav extends Component {
 
-
+//Maybe add the tag
 
   tagSearch(event) {
     //Search for tags matching
