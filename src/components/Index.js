@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Photo from './Photo';
 import PhotoBack from './Photoback';
-import {Row} from 'react-materialize';
+import PhotoSorted from './PhotoSorted'
+import {SideNav, NavItem, Navbar, Button, Row, Col, Tag} from 'react-materialize';
 
 var masonryOptions = {
     transitionDuration: 0
@@ -22,6 +23,10 @@ class Index extends Component {
     super(props);
     this.state = {
       photos:[],
+      tags:[],
+      searchResult: null,
+      photosByTag:[]
+
     }
   };
 
@@ -38,6 +43,24 @@ componentDidMount() {
   .catch((err) => {
     console.log(err, "get not working");
   })
+
+// axios
+//   .get(`https://api.flickr.com/services/rest/?method=flickr.tags.getListUser&api_key=14fbe823601c3249f936eb3ca46fcc51&user_id=147813786%40N08&format=json&nojsoncallback=1`)
+//   .then((response) => {
+//     this.setState({
+//       tags: response.data.who.tags.tag
+//     })
+//     console.log(this.state.tags, "api tag data");
+//   })
+//   .catch((err) => {
+//     console.log(err, "tag get not working");
+//   })
+}
+
+tagSearch(e) {
+  this.setState({searchResult: !this.state.photosByTag});
+  console.log("tag clicked", this.state.tags.tag.content);
+  //Set the search query for the tag they just clicked on
 }
 
 // How to pass a function in the parent component to the child component:
@@ -45,20 +68,52 @@ componentDidMount() {
 
 
 render() {
-
   return (
-    <div>
-      <div className= "row">
-        {this.state.photos.map((photo) => {
+  <div>
+    <SideNav
+    trigger={<Button floating large className='red show-on-large' waves='light' icon='add' />}
+    options={{ closeOnClick: true }}
+    >
+    <h5 className='center'>Tag List</h5>
+
+        {this.state.tags.map((tag) => {
             return (
-              <Photo key={photo.id} photo={photo}/>
-                )
+              <Tag onClick={this.tagSearch.bind(this)}>{this.state.tags.tag.content}</Tag>
+            )}
+        )}
 
+  </SideNav>
 
-        }) }
+</div>
+)
+
+  if (this.state.searchResult) {
+    return (
+      <div>
+        <Row>
+          {this.state.photosByTag.map((photo) => {
+              return (
+                <PhotoSorted key={photo.id} photo={photo}/>
+                  )
+          }) }
+        </Row>
       </div>
-    </div>
     )
+  } else {
+    return (
+      <div>
+        <div className= "row">
+          {this.state.photos.map((photo) => {
+              return (
+                <Photo key={photo.id} photo={photo}/>
+                  )
+          }) }
+        </div>
+      </div>
+      )}
+
+
+
   }
 
 }

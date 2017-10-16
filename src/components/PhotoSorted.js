@@ -8,7 +8,7 @@ import React, {Component} from 'react';
 import {Col, Row, CardPanel} from 'react-materialize';
 const photobackStyle= {'height':'300px','border':'1px solid', 'max-width':'350px'};
 
-class Photo extends Component {
+class PhotoSorted extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,4 +61,4 @@ render() {
 }
 
 
-export default Photo;
+export default PhotoSorted;
