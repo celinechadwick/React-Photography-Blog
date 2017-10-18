@@ -23,9 +23,14 @@ class Index extends Component {
     super(props);
     this.state = {
       photos:[],
+      //photos from the api call
       tags:[],
+      //tags from the flickr api call
       searchResult: null,
+      //Search param from clicking on a tag
+
       photosByTag:[]
+      //get for photos BY tag. should only be set when the tagSearch method is called by a click on the actual tag
 
     }
   };
@@ -37,29 +42,31 @@ componentDidMount() {
     this.setState({
       photos: response.data.photos.photo
     });
-    console.log(this.state.photos, "api data");
+    console.log(this.state.photos, "api data", this.state.searchResult);
 
   })
   .catch((err) => {
     console.log(err, "get not working");
   })
 
-// axios
-//   .get(`https://api.flickr.com/services/rest/?method=flickr.tags.getListUser&api_key=14fbe823601c3249f936eb3ca46fcc51&user_id=147813786%40N08&format=json&nojsoncallback=1`)
-//   .then((response) => {
-//     this.setState({
-//       tags: response.data.who.tags.tag
-//     })
-//     console.log(this.state.tags, "api tag data");
-//   })
-//   .catch((err) => {
-//     console.log(err, "tag get not working");
-//   })
+axios
+  .get(`https://api.flickr.com/services/rest/?method=flickr.tags.getListUser&api_key=128beebe90a24a0b382db91c7e912429&user_id=147813786%40N08&format=json&nojsoncallback=1`)
+  .then((response) => {
+    this.setState({
+      tags: response.data.who.tags
+    });
+    console.log(this.state.tags, "api tag data");
+  })
+  .catch((err) => {
+    console.log(err, "tag get not working");
+  })
 }
 
+
 tagSearch(e) {
-  this.setState({searchResult: !this.state.photosByTag});
-  console.log("tag clicked", this.state.tags.tag.content);
+
+  // this.setState({searchResult: });
+  console.log("tag clicked", this.state.tags.tag._content);
   //Set the search query for the tag they just clicked on
 }
 
@@ -68,28 +75,25 @@ tagSearch(e) {
 
 
 render() {
-  return (
-  <div>
-    <SideNav
-    trigger={<Button floating large className='red show-on-large' waves='light' icon='add' />}
-    options={{ closeOnClick: true }}
-    >
-    <h5 className='center'>Tag List</h5>
 
-        {this.state.tags.map((tag) => {
-            return (
-              <Tag onClick={this.tagSearch.bind(this)}>{this.state.tags.tag.content}</Tag>
-            )}
-        )}
 
-  </SideNav>
-
-</div>
-)
 
   if (this.state.searchResult) {
     return (
       <div>
+      <SideNav
+      trigger={<Button floating large className='red show-on-large' waves='light' icon='add' />}
+      options={{ closeOnClick: true }}
+      >
+      <h5 className='center'>Tag List</h5>
+
+          {this.state.tags.map((tag) => {
+              return (
+                <Tag onClick={this.tagSearch.bind(this)}>{this.state.tag._content}</Tag>
+              )}
+          )}
+
+    </SideNav>
         <Row>
           {this.state.photosByTag.map((photo) => {
               return (
@@ -97,18 +101,27 @@ render() {
                   )
           }) }
         </Row>
-      </div>
+        </div>
     )
   } else {
     return (
       <div>
-        <div className= "row">
-          {this.state.photos.map((photo) => {
-              return (
-                <Photo key={photo.id} photo={photo}/>
-                  )
-          }) }
-        </div>
+        <SideNav
+        trigger={<Button floating large className='red show-on-large' waves='light' icon='add' />}
+        options={{ closeOnClick: true }}
+        >
+          <h5 className='center'>Tag List</h5>
+
+
+          </SideNav>
+
+          <Row>
+            {this.state.photos.map((photo) => {
+                return (
+                  <Photo key={photo.id} photo={photo}/>
+                    )
+            }) }
+        </Row>
       </div>
       )}
 

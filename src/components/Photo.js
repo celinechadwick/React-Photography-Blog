@@ -6,7 +6,7 @@
 
 import React, {Component} from 'react';
 import {Col, Row, CardPanel} from 'react-materialize';
-const photobackStyle= {'height':'300px','border':'1px solid', 'max-width':'350px'};
+
 
 class Photo extends Component {
   constructor(props) {
@@ -33,12 +33,15 @@ class Photo extends Component {
   //   console.log(this.props)
   // }
 
+
+
+
 render() {
 
   if (this.state.photoToggled) {
     return (
-      <Col s={6}>
-        <CardPanel onClick={this.handleSwitchFront.bind(this)} style={photobackStyle}>
+      <Col s={12} m={6}>
+        <CardPanel onClick={this.handleSwitchFront.bind(this)} className="flow-text" style={{height: this.props.photo.height_m, width: this.props.photo.width_m}}>
           <h4>
             {this.props.photo.title}
           </h4>
@@ -50,8 +53,8 @@ render() {
       )
     } else {
   return (
-    <Col s={6}>
-        <img src={this.props.photo.url_m} onClick={this.handleClick.bind(this)}/>
+    <Col s={12} m={6}>
+        <img src={this.props.photo.url_m} className="responsive-img" onClick={this.handleClick.bind(this)}/>
     </Col>
   )
 }

@@ -37,28 +37,31 @@ render() {
 
   if (this.state.photoToggled) {
     return (
-      <Col s={6}>
-        <CardPanel onClick={this.handleSwitchFront.bind(this)} style={photobackStyle}>
-          <h4>
-            {this.props.photo.title}
-          </h4>
-          <p>
-            {this.props.photo.description._content}
-          </p>
-        </CardPanel>
-      </Col>
+      <Row>
+        <Col s={6}>
+          <CardPanel onClick={this.handleSwitchFront.bind(this)} style={photobackStyle}>
+            <h4>
+              {this.props.photosByTag.title}
+            </h4>
+            <p>
+              {this.props.photosByTag.description._content}
+            </p>
+          </CardPanel>
+        </Col>
+      </Row>
       )
     } else {
   return (
-    <Col s={6}>
-        <img src={this.props.photo.url_m} onClick={this.handleClick.bind(this)}/>
-    </Col>
+    <Row>
+      <Col s={6}>
+          <img src={this.props.photosByTag.url_m} onClick={this.handleClick.bind(this)}/>
+      </Col>
+    </Row>
   )
 }
 }
 
 
 }
-
 
 export default PhotoSorted;
