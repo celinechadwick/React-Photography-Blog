@@ -3,7 +3,7 @@ import axios from 'axios';
 import Photo from './Photo';
 import PhotoBack from './Photoback';
 import PhotoSorted from './PhotoSorted'
-import {SideNav, NavItem, Navbar, Button, Row, Col, Tag, Chip} from 'react-materialize';
+import {Footer, SideNav, NavItem, Navbar, Button, Row, Col, Tag, Chip} from 'react-materialize';
 
 var masonryOptions = {
     transitionDuration: 0
@@ -15,6 +15,18 @@ var gridStyle = {
   height: '120px',
   width: '20%',
   'float': 'left'
+}
+var chipStyle = {
+  align:'center',
+  'border-radius': '69px 69px 69px 69px',
+'-moz-border-radius': '69px 69px 69px 69px',
+'-webkit-border-radius': '69px 69px 69px 69px',
+border: '2px dashed #999699',
+height: '50px',
+width:'250px',
+padding:'5px',
+margin: 'auto',
+'font-size': '18px'
 }
 
 var tagColumnStyle={padding:'20'}
@@ -68,18 +80,17 @@ axios
 
 
 tagSearch(e) {
-
   // if (!this.state.searchResult){
   this.setState({
     searchResult:e.target.textContent
-  })
+  });
 // } else {
 //   this.setState({searchResult: this.state.searchResult+"%2C+"+e.target.textContent})
 //   console.log("search result is", this.state.searchResult);
 // };
   //set search result in state to this tag value and then perform a GET by tag
   axios
-  .get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=128beebe90a24a0b382db91c7e912429&user_id=147813786%40N08&tags=${this.state.searchResult}&extras=+description%2C+original_format%2C+last_update%2C+geo%2C+tags%2C+o_dims%2C+views%2C+media%2C+url_sq%2C+url_t%2C+url_s%2C+url_q%2C+url_m%2C+url_n%2C+url_z%2C+url_c%2C+url_l%2C+url_o&per_page=500&format=json&nojsoncallback=1`)
+  .get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=128beebe90a24a0b382db91c7e912429&user_id=147813786%40N08&tags=${e.target.textContent}&extras=+description%2C+original_format%2C+last_update%2C+geo%2C+tags%2C+o_dims%2C+views%2C+media%2C+url_sq%2C+url_t%2C+url_s%2C+url_q%2C+url_m%2C+url_n%2C+url_z%2C+url_c%2C+url_l%2C+url_o&per_page=500&format=json&nojsoncallback=1`)
   .then((response) => {
     this.setState({
       photos: response.data.photos.photo
@@ -103,19 +114,21 @@ render() {
 
     return (
       <div>
-        <SideNav trigger={<Button floating large className='red show-on-large' waves='light' icon='add' />} options={{ closeOnClick: true }}>
-          <h5 className='center'>Tag List</h5>
-            <Row>
+        <SideNav trigger={<Button floating large className='show-on-large' waves='light' icon='add' />} options={{ closeOnClick: false }}>
+          <h4 className='center'>Tag List</h4>
+          <div className= "center" style={chipStyle}>
+            { this.state.searchResult ? <Chip className="center">{this.state.searchResult}</Chip> : <div>click a tag</div> }
+          </div>
+
+          <Row>
             <Col s={12} style={tagColumnStyle}>
             {this.state.tags.map((tag) => {
                 return (
-                  <div className="chip" value={tag._content} key={tag._content} onClick={this.tagSearch.bind(this)} style={tagStyle}> {tag._content} </div>
+                  <div className="chip hoverable" value={tag._content} key={tag._content} onClick={this.tagSearch.bind(this)} style={tagStyle}> {tag._content}</div>
                     )
             }) }
             </Col>
-            </Row>
-
-
+          </Row>
           </SideNav>
 
           <Row>

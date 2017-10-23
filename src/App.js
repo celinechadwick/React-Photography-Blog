@@ -1,13 +1,13 @@
 import React from 'react';
 import Index from './components/Index';
-import Footer from './components/Footer';
+import SiteFooter from './components/SiteFooter';
 
 const App = React.createClass({
 render() {
   return (
     <div>
       <Index />
-      <Footer />
+      <SiteFooter />
     </div>
   )
 }

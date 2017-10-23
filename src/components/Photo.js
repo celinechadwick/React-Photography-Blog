@@ -40,7 +40,7 @@ render() {
 
   if (this.state.photoToggled) {
     return (
-      <Col s={12} m={6}>
+      <Col s={12} l={6}>
         <CardPanel onClick={this.handleSwitchFront.bind(this)} className="flow-text" style={{height: this.props.photo.height_m, width: this.props.photo.width_m}}>
           <h4>
             {this.props.photo.title}
@@ -53,7 +53,7 @@ render() {
       )
     } else {
   return (
-    <Col s={12} m={6}>
+    <Col s={12} l={6}>
         <img src={this.props.photo.url_m} className="responsive-img" onClick={this.handleClick.bind(this)}/>
     </Col>
   )
