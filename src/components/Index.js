@@ -3,14 +3,13 @@ import axios from 'axios';
 import Photo from './Photo';
 import PhotoBack from './Photoback';
 import PhotoSorted from './PhotoSorted'
-import {Footer, SideNav, NavItem, Navbar, Button, Row, Col, Tag, Chip} from 'react-materialize';
+import {Container, Footer, SideNav, NavItem, Navbar, Button, Icon,Row, Col, Tag, Chip, Tab, Tabs} from 'react-materialize';
 
-var masonryOptions = {
-    transitionDuration: 0
-};
-var style = {
 
-};
+var pageStyling={
+  padding:'30px',
+  color:'red'
+}
 var gridStyle = {
   height: '120px',
   width: '20%',
@@ -25,13 +24,15 @@ border: '2px dashed #999699',
 height: '50px',
 width:'250px',
 padding:'5px',
-margin: 'auto',
+margin: '15px auto',
 'font-size': '18px'
-}
+};
 
-var tagColumnStyle={padding:'20'}
+var tagColumnStyle={padding:'20'};
+var logoStyle={margin:'auto'};
+var tagStyle={margin:'5px'};
+var iconStyle={height:'40px'};
 
-var tagStyle={margin:'5px'}
 
 class Index extends Component {
   constructor(props) {
@@ -61,7 +62,7 @@ componentDidMount() {
 
   })
   .catch((err) => {
-    console.log(err, "get not working");
+    console.log(err, "get not working")
   })
 
 axios
@@ -113,31 +114,42 @@ render() {
 
 
     return (
-      <div>
-        <SideNav trigger={<Button floating large className='show-on-large' waves='light' icon='add' />} options={{ closeOnClick: false }}>
-          <h4 className='center'>Tag List</h4>
-          <div className= "center" style={chipStyle}>
-            { this.state.searchResult ? <Chip className="center">{this.state.searchResult}</Chip> : <div>click a tag</div> }
+      <div className='pageStyling'>
+        <div className="center-align flow-text">
+        <h1>Celine Chadwick Photography</h1>
+        <div style={{padding:'30px'}}>
+          <ul className='tabs'>
+        		<li className="tab col s3"><a href="" className='black-text'><h6>Inspiration</h6></a></li>
+            <li className="tab col s3"><a href="" className='black-text'><h6>Contact Me</h6></a></li>
+          </ul>
+        </div>
+
+        <SideNav trigger={<div><Icon small>search</Icon></div>} options={{ closeOnClick: true }}>
+          <h5 className='center'>Tag List</h5>
+            <div className= "center" style={chipStyle}>
+              { this.state.searchResult ? <Chip className="center">{this.state.searchResult}</Chip> : <div>click a tag</div> }
+            </div>
+
+            <Row>
+                <Col s={12} style={tagColumnStyle}>
+                {this.state.tags.map((tag) => {
+                    return (
+                      <div className="chip hoverable" value={tag._content} key={tag._content} onClick={this.tagSearch.bind(this)} style={tagStyle}> {tag._content}</div>
+                        )
+                }) }
+                </Col>
+            </Row>
+          </SideNav>
           </div>
 
           <Row>
-            <Col s={12} style={tagColumnStyle}>
-            {this.state.tags.map((tag) => {
-                return (
-                  <div className="chip hoverable" value={tag._content} key={tag._content} onClick={this.tagSearch.bind(this)} style={tagStyle}> {tag._content}</div>
-                    )
-            }) }
-            </Col>
-          </Row>
-          </SideNav>
 
-          <Row>
-            {this.state.photos.map((photo) => {
-                return (
-                  <Photo key={photo.id} photo={photo}/>
-                    )
-            }) }
-        </Row>
+              {this.state.photos.map((photo) => {
+                  return (
+                    <Photo key={photo.id} photo={photo} />
+                      )
+              }) }
+          </Row>
       </div>
       )}
 

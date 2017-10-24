@@ -37,11 +37,10 @@ class Photo extends Component {
 
 
 render() {
-
   if (this.state.photoToggled) {
     return (
-      <Col s={12} l={6}>
-        <CardPanel onClick={this.handleSwitchFront.bind(this)} className="flow-text" style={{height: this.props.photo.height_m, width: this.props.photo.width_m}}>
+      <Col s={12} className='center-align'>
+        <CardPanel onClick={this.handleSwitchFront.bind(this)} className="flow-text" style={{height: this.props.photo.height_l, width: this.props.photo.width_l, padding:'40px'}}>
           <h4>
             {this.props.photo.title}
           </h4>
@@ -51,10 +50,10 @@ render() {
         </CardPanel>
       </Col>
       )
-    } else {
+    }  else {
   return (
-    <Col s={12} l={6}>
-        <img src={this.props.photo.url_m} className="responsive-img" onClick={this.handleClick.bind(this)}/>
+    <Col s={12} className='center-align'>
+        <img src={this.props.photo.url_l} className="responsive-img" onClick={this.handleClick.bind(this)} style={{padding:'40px'}}/>
     </Col>
   )
 }
