@@ -11,9 +11,7 @@ import {Col, Row, CardPanel, MediaBox} from 'react-materialize';
 class Photo extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      photoToggled:false
-    }
+
   }
   handleClick(e) {
     console.log(e.target)
@@ -38,13 +36,19 @@ class Photo extends Component {
 
 render() {
 
+if (!this.props.likes) {
   return (
     <Col s={12} style={{margin:'0 auto'}}>
     <MediaBox src={this.props.photo.url_l} caption={this.props.photo.description._content} width="{this.props.photo.width_l}" style={{margin:'0 auto'}}/>
     </Col>
-
-
   )
+} else {
+    return(
+      <Col s={12} style={{margin:'0 auto'}}>
+      <MediaBox src={this.props.photo.url_l}  style={{margin:'0 auto'}}/>
+      </Col>
+    )
+  }
 }
 
 }
