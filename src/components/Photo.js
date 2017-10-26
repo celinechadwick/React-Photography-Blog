@@ -5,7 +5,7 @@
 //or this could just be done in anoth4er component that just has the tag list displayed as chips
 
 import React, {Component} from 'react';
-import {Col, Row, CardPanel} from 'react-materialize';
+import {Col, Row, CardPanel, MediaBox} from 'react-materialize';
 
 
 class Photo extends Component {
@@ -37,28 +37,15 @@ class Photo extends Component {
 
 
 render() {
-  if (this.state.photoToggled) {
-    return (
-      <Col s={12} className='center-align'>
-        <CardPanel onClick={this.handleSwitchFront.bind(this)} className="flow-text" style={{height: this.props.photo.height_l, width: this.props.photo.width_l, padding:'40px'}}>
-          <h4>
-            {this.props.photo.title}
-          </h4>
-          <p>
-            {this.props.photo.description._content}
-          </p>
-        </CardPanel>
-      </Col>
-      )
-    }  else {
+
   return (
-    <Col s={12} className='center-align'>
-        <img src={this.props.photo.url_l} className="responsive-img" onClick={this.handleClick.bind(this)} style={{padding:'40px'}}/>
+    <Col s={12} style={{margin:'0 auto'}}>
+    <MediaBox src={this.props.photo.url_l} caption={this.props.photo.description._content} width="{this.props.photo.width_l}" style={{margin:'0 auto'}}/>
     </Col>
+
+
   )
 }
-}
-
 
 }
 
