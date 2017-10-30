@@ -13,39 +13,20 @@ class Photo extends Component {
     super(props);
 
   }
-  handleClick(e) {
-    console.log(e.target)
-  this.setState({photoToggled: !this.state.photoToggled});
-  console.log("clicked", this.props.photoToggled);
-  //when the photo front is clicked it should change phototoggled to true, thereby flipping the image back in the render
-
-  }
-
-  handleSwitchFront(event) {
-  this.setState({photoToggled: !this.state.photoToggled});
-  console.log("clicked", this.state.photoToggled);
-  //when the photoback is clicked it should change phototoggled to false, thereby flipping the image back in the render
-  }
-  // testClick(){
-  //   console.log('hi from Photo.js')
-  //   console.log(this.props)
-  // }
-
-
 
 
 render() {
 
 if (!this.props.likes) {
   return (
-    <Col s={12} style={{margin:'0 auto'}}>
-    <MediaBox src={this.props.photo.url_l} caption={this.props.photo.description._content} width="{this.props.photo.width_l}" style={{margin:'0 auto'}}/>
+    <Col s={12} style={{margin:'10px'}}>
+    <MediaBox src={this.props.photo.url_l} className="responsive-img" caption={this.props.photo.description._content} width="{this.props.photo.width_l}" style={{padding:'0', margin:'0 auto'}}/>
     </Col>
   )
 } else {
     return(
-      <Col s={12} style={{margin:'0 auto'}}>
-      <MediaBox src={this.props.photo.url_l}  style={{margin:'0 auto'}}/>
+      <Col s={12} l={6} style={{margin:'auto'}}>
+      <MediaBox src={this.props.photo.url_l} className="responsive-img" style={{margin:'10px'}}/>
       </Col>
     )
   }

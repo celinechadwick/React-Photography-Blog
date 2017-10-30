@@ -5,7 +5,7 @@ const App = React.createClass({
 render() {
   return (
     <div>
-      <Index />
+      <Index/>
     </div>
   )
 }

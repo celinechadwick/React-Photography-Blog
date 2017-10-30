@@ -4,13 +4,14 @@ import Photo from './Photo';
 import PhotoBack from './Photoback';
 import PhotoSorted from './PhotoSorted';
 import Contact from './Contact';
-import {Container, Footer, SideNav, NavItem, Navbar, Button, Icon,Row, Col, Tag, Chip, Tab, Tabs} from 'react-materialize';
+import {Container, Footer, SideNav, NavItem, Navbar, Button, Divider, Icon,Row, Col, Tag, Chip, Tab, Tabs} from 'react-materialize';
+
 
 
 var pageStyling={
   padding:'30px',
-  color:'red'
-}
+  }
+
 var gridStyle = {
   height: '120px',
   width: '20%',
@@ -54,6 +55,7 @@ class Index extends Component {
 
     }
   };
+
 
 componentDidMount() {
   axios
@@ -139,24 +141,31 @@ aboutPage(e) {
   console.log(this.state.likes);
 };
 
+scrollTop(e) {
+  
+}
 
 
 render() {
 
     if (!this.state.contactPage) {
       return(
-        <div className='pageStyling'>
-          <div className="center-align flow-text">
-          <h1>Celine Chadwick Photography</h1>
+        <div style={pageStyling}>
+              <i className="medium material-icons right center" onClick{this.scrollTop.bind(this)} style={{'color':'grey','position':'fixed', 'right':'5%', 'top':'50%'}}>
+              vertical_align_top
+              </i>
+          <div className="center-align flow-text" style={{margin:'50px'}}>
+          <h1>Logo </h1>
           <div style={{padding:'30px'}}>
             <ul className='tabs'>
+              <li className="tab col s3" onClick={this.componentDidMount.bind(this)}><a href="" className='black-text'><h6>My Photos</h6></a></li>
           		<li className="tab col s3" onClick={this.likesSearch.bind(this)}><a href="" className='black-text'><h6>Inspiration</h6></a></li>
               <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>Contact Me</h6></a></li>
             </ul>
           </div>
 
 
-          <SideNav trigger={<div><Icon small>search</Icon></div>} options={{ closeOnClick: true }}>
+          <SideNav trigger={<div><Chip><Icon small>search</Icon></Chip></div>} options={{ closeOnClick: true }}>
             <h5 className='center'>Tag List</h5>
               <div className= "center" style={chipStyle}>
                 { this.state.searchResult ? <Chip className="center">{this.state.searchResult}</Chip> : <div>click a tag</div> }
@@ -173,10 +182,10 @@ render() {
               </Row>
             </SideNav>
             </div>
+            <Divider/>
             <Row>
                 {this.state.photos.map((photo) => {
                     return (
-
                       <Photo key={photo.id} photo={photo} likes={this.state.likes} />
                         )
                 }) }
@@ -185,11 +194,12 @@ render() {
         )
       } else {
       return(
-        <div className='pageStyling'>
-          <div className="center-align flow-text">
+        <div style={pageStyling}>
+          <div className="center-align flow-text" style={{margin:'20px'}}>
           <h1>Celine Chadwick Photography</h1>
           <div style={{padding:'30px'}}>
             <ul className='tabs'>
+              <li className="tab col s3" onClick={this.componentDidMount.bind(this)}><a href="" className='black-text'><h6>My Photos</h6></a></li>
               <li className="tab col s3" onClick={this.likesSearch.bind(this)}><a href="" className='black-text'><h6>Inspiration</h6></a></li>
               <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>Contact Me</h6></a></li>
             </ul>
