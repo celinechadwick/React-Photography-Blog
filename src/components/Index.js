@@ -51,7 +51,9 @@ class Index extends Component {
       //get for photos BY tag. should only be set when the tagSearch method is called by a click on the actual tag
       contactPage:false,
       //if the likes are true and contact is false, it will render my favorite photos
-      likes:false
+      likes:false,
+      //For scroll to top of page
+      intervalId:0
 
     }
   };
@@ -141,8 +143,14 @@ aboutPage(e) {
   console.log(this.state.likes);
 };
 
-scrollTop(e) {
-  
+
+topScroll(e) {
+if(window.scrollY!=0)
+{
+    setTimeout(function() {
+       window.scrollTo(0,window.scrollY0);
+    }, 500);
+   }
 }
 
 
@@ -151,31 +159,34 @@ render() {
     if (!this.state.contactPage) {
       return(
         <div style={pageStyling}>
-              <i className="medium material-icons right center" onClick{this.scrollTop.bind(this)} style={{'color':'grey','position':'fixed', 'right':'5%', 'top':'50%'}}>
-              vertical_align_top
-              </i>
+
+              <div className="fixed-action-btn">
+                <a className="btn-floating btn-large grey hoverable" onClick={this.topScroll.bind(this)} style={{opacity:'.45'}}>
+                  <i className="medium material-icons" style={{'color':'black'}}>vertical_align_top</i>
+                </a>
+              </div>
           <div className="center-align flow-text" style={{margin:'50px'}}>
           <h1>Logo </h1>
           <div style={{padding:'30px'}}>
             <ul className='tabs'>
               <li className="tab col s3" onClick={this.componentDidMount.bind(this)}><a href="" className='black-text'><h6>My Photos</h6></a></li>
           		<li className="tab col s3" onClick={this.likesSearch.bind(this)}><a href="" className='black-text'><h6>Inspiration</h6></a></li>
-              <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>Contact Me</h6></a></li>
+              <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>About Me</h6></a></li>
             </ul>
           </div>
 
 
           <SideNav trigger={<div><Chip><Icon small>search</Icon></Chip></div>} options={{ closeOnClick: true }}>
-            <h5 className='center'>Tag List</h5>
-              <div className= "center" style={chipStyle}>
-                { this.state.searchResult ? <Chip className="center">{this.state.searchResult}</Chip> : <div>click a tag</div> }
+            <div className='center' style={{'font-style':'medium'}}>Tag List</div>
+              <div style={chipStyle}>
+                { this.state.searchResult ? <Chip style={{margin:'20px'}}>{this.state.searchResult}</Chip> : <div style={{margin:'5px'}}>click a tag</div> }
               </div>
 
               <Row>
                   <Col s={12} style={tagColumnStyle}>
                   {this.state.tags.map((tag) => {
                       return (
-                        <div className="chip hoverable" value={tag._content} key={tag._content} onClick={this.tagSearch.bind(this)} style={tagStyle}> {tag._content}</div>
+                        <div className="chip hoverable" value={tag._content} key={tag._content} onClick={this.tagSearch.bind(this)} style={tagStyle}>{tag._content}</div>
                           )
                   }) }
                   </Col>
@@ -195,16 +206,17 @@ render() {
       } else {
       return(
         <div style={pageStyling}>
-          <div className="center-align flow-text" style={{margin:'20px'}}>
-          <h1>Celine Chadwick Photography</h1>
-          <div style={{padding:'30px'}}>
-            <ul className='tabs'>
-              <li className="tab col s3" onClick={this.componentDidMount.bind(this)}><a href="" className='black-text'><h6>My Photos</h6></a></li>
-              <li className="tab col s3" onClick={this.likesSearch.bind(this)}><a href="" className='black-text'><h6>Inspiration</h6></a></li>
-              <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>Contact Me</h6></a></li>
-            </ul>
+          <div className="center-align flow-text" style={{margin:'50px'}}>
+            <h1>Logo </h1>
+            <div style={{padding:'30px'}}>
+              <ul className='tabs'>
+                <li className="tab col s3" onClick={this.componentDidMount.bind(this)}><a href="" className='black-text'><h6>My Photos</h6></a></li>
+                <li className="tab col s3" onClick={this.likesSearch.bind(this)}><a href="" className='black-text'><h6>Inspiration</h6></a></li>
+                <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>About Me</h6></a></li>
+              </ul>
+            </div>
           </div>
-        </div>
+        <Divider/>
           <Contact />
         </div>
       )
