@@ -8,6 +8,7 @@ import {Container, Footer, SideNav, NavItem, Navbar, Button, Divider, Icon,Row, 
 
 var pageStyling={
   padding:'30px',
+  fontFamily:"Roboto"
   }
 
 var gridStyle = {
@@ -51,8 +52,6 @@ class Index extends Component {
       //if the likes are true and contact is false, it will render my favorite photos
       likes:false,
       //For scroll to top of page
-      intervalId:0
-
     }
   };
 
@@ -143,13 +142,8 @@ aboutPage(e) {
 };
 
 
-topScroll(e) {
-if(window.scrollY!=0)
-{
-    setTimeout(function() {
-       window.scrollTo(0,window.scrollY0);
-    }, 500);
-   }
+topScroll() {
+window.scrollTo(0, 0);
 }
 
 
@@ -165,7 +159,8 @@ render() {
                 </a>
               </div>
           <div className="center-align flow-text" style={{margin:'50px'}}>
-          <h1>Logo </h1>
+          <div style={{fontSize:'7vh', fontFamily:'Roboto', 'letter-spacing':'4', 'padding':'5px', fontWeight:'200'}}>Street Scenes </div>
+          <div style={{'margin-bottom':'40px', 'font-size':'3.5vh'}}> Celine Chadwick Photography</div>
           <div style={{padding:'30px'}}>
             <ul className='tabs'>
               <li className="tab col s3" onClick={this.componentDidMount.bind(this)}><a href="" className='black-text'><h6>My Photos</h6></a></li>
@@ -175,8 +170,8 @@ render() {
           </div>
 
 
-          <SideNav trigger={<div><Chip><Icon small>search</Icon></Chip></div>} options={{ closeOnClick: true }}>
-            <div className='center' style={{'font-style':'medium'}}>Tag List</div>
+          <SideNav trigger={<div><Icon small>search</Icon></div>} options={{ closeOnClick: true }}>
+            <div className='center' style={{fontWeight:'500', marginTop:'10px'}}>Tag List</div>
               <div style={chipStyle}>
                 { this.state.searchResult ? <Chip style={{margin:'20px'}}>{this.state.searchResult}</Chip> : <div style={{margin:'5px'}}>click a tag</div> }
               </div>
@@ -193,7 +188,7 @@ render() {
             </SideNav>
             </div>
             <Divider/>
-            <Row>
+            <Row style={{marginTop:'30px'}}>
                 {this.state.photos.map((photo) => {
                     return (
                       <Photo key={photo.id} photo={photo} likes={this.state.likes} />
@@ -206,12 +201,13 @@ render() {
       return(
         <div style={pageStyling}>
           <div className="center-align flow-text" style={{margin:'50px'}}>
-            <h1>Logo </h1>
+          <div style={{'font-size':'7vh', 'font-family':'Roboto', 'letter-spacing':'4', 'padding':'5px', fontWeight:'200'}}>Street Scenes </div>
+          <div style={{'margin-bottom':'40px', 'font-size':'3.5vh'}}> Celine Chadwick Photography</div>
             <div style={{padding:'30px'}}>
               <ul className='tabs'>
                 <li className="tab col s3" onClick={this.componentDidMount.bind(this)}><a href="" className='black-text'><h6>My Photos</h6></a></li>
                 <li className="tab col s3" onClick={this.likesSearch.bind(this)}><a href="" className='black-text'><h6>Inspiration</h6></a></li>
-                <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>Cameras</h6></a></li>
+                <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>About Me</h6></a></li>
               </ul>
             </div>
           </div>

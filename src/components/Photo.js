@@ -25,8 +25,8 @@ if (!this.props.likes) {
   )
 } else {
     return(
-      <Col s={12} style={{margin:'auto'}}>
-      <MediaBox src={this.props.photo.url_l} className="responsive-img" width="60%" style={{margin:'10px auto'}}/>
+      <Col s={12} style={{margin:'10px'}}>
+      <MediaBox src={this.props.photo.url_l} className="responsive-img" width="60%" style={{margin:'0 auto'}}/>
       </Col>
     )
   }
