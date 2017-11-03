@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import Photo from './Photo';
-import PhotoBack from './Photoback';
-import PhotoSorted from './PhotoSorted';
 import Contact from './Contact';
 import {Container, Footer, SideNav, NavItem, Navbar, Button, Divider, Icon,Row, Col, Tag, Chip, Tab, Tabs} from 'react-materialize';
 
@@ -64,7 +62,8 @@ componentDidMount() {
   .get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=128beebe90a24a0b382db91c7e912429&user_id=147813786%40N08&extras=+description%2C+license%2C+date_upload%2C+date_taken%2C+owner_name%2C+icon_server%2C+original_format%2C+last_update%2C+geo%2C+tags%2C+machine_tags%2C+o_dims%2C+views%2C+media%2C+path_alias%2C+url_sq%2C+url_t%2C+url_s%2C+url_q%2C+url_m%2C+url_n%2C+url_z%2C+url_c%2C+url_l%2C+url_o&per_page=500&format=json&nojsoncallback=1`)
   .then((response) => {
     this.setState({
-      photos: response.data.photos.photo
+      photos: response.data.photos.photo,
+      likes:false
     });
     console.log(this.state.photos, "api data", this.state.searchResult);
 
@@ -171,7 +170,7 @@ render() {
             <ul className='tabs'>
               <li className="tab col s3" onClick={this.componentDidMount.bind(this)}><a href="" className='black-text'><h6>My Photos</h6></a></li>
           		<li className="tab col s3" onClick={this.likesSearch.bind(this)}><a href="" className='black-text'><h6>Inspiration</h6></a></li>
-              <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>About Me</h6></a></li>
+              <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>About me</h6></a></li>
             </ul>
           </div>
 
@@ -212,7 +211,7 @@ render() {
               <ul className='tabs'>
                 <li className="tab col s3" onClick={this.componentDidMount.bind(this)}><a href="" className='black-text'><h6>My Photos</h6></a></li>
                 <li className="tab col s3" onClick={this.likesSearch.bind(this)}><a href="" className='black-text'><h6>Inspiration</h6></a></li>
-                <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>About Me</h6></a></li>
+                <li className="tab col s3" onClick={this.aboutPage.bind(this)}><a href="" className='black-text'><h6>Cameras</h6></a></li>
               </ul>
             </div>
           </div>
