@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Photo from './Photo';
 import Contact from './Contact';
-import {Container, Footer, SideNav, NavItem, Navbar, Button, Divider, Icon,Row, Col, Tag, Chip, Tab, Tabs} from 'react-materialize';
+import {Container, Footer, SideNav, NavItem, Navbar, Button, Toast, Divider, Icon,Row, Col, Tag, Chip, Tab, Tabs} from 'react-materialize';
 
 
 
@@ -85,6 +85,9 @@ axios
 
 }
 
+//set state to an array. do an if else where if the length is 1 it adds the next search on to it and does the get. if array.length === 2
+//then delete it and set state to the current value.
+//THEN: make the search display a map thrrough this array
 
 tagSearch(e) {
   // if (!this.state.searchResult){
@@ -153,14 +156,18 @@ render() {
       return(
         <div style={pageStyling}>
 
+
               <div className="fixed-action-btn">
                 <a className="btn-floating btn-large grey hoverable" onClick={this.topScroll.bind(this)} style={{opacity:'.45'}}>
                   <i className="medium material-icons" style={{'color':'black'}}>vertical_align_top</i>
                 </a>
               </div>
           <div className="center-align flow-text" style={{margin:'50px'}}>
-          <div style={{fontSize:'7vh', fontFamily:'Roboto', 'letter-spacing':'4', 'padding':'5px', fontWeight:'200'}}>Street Scenes </div>
-          <div style={{'margin-bottom':'40px', 'font-size':'3.5vh'}}> Celine Chadwick Photography</div>
+            <div onClick={this.componentDidMount.bind(this)}>
+              <div style={{fontSize:'7vh', fontFamily:'Roboto', 'letter-spacing':'4', 'padding':'5px', fontWeight:'200', lineHeight:'110%'}}>Street Scenes </div>
+              <div style={{'margin-bottom':'40px', 'font-size':'3.5vh'}}> Celine Chadwick Photography</div>
+            </div>
+
           <div style={{padding:'30px'}}>
             <ul className='tabs'>
               <li className="tab col s3" onClick={this.componentDidMount.bind(this)}><a href="" className='black-text'><h6>My Photos</h6></a></li>
@@ -212,7 +219,7 @@ render() {
             </div>
           </div>
         <Divider/>
-          <Contact />
+          <Contact/>
         </div>
       )
     }

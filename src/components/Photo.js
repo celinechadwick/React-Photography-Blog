@@ -20,13 +20,13 @@ render() {
 if (!this.props.likes) {
   return (
     <Col s={12} style={{margin:'10px'}}>
-    <MediaBox src={this.props.photo.url_l} className="responsive-img center-align" width="60%" caption={this.props.photo.description._content} style={{margin:'0 auto'}}/>
+    <MediaBox src={this.props.photo.url_l} className="responsive-img center-align" width="60%" caption= {this.props.photo.description._content} style={{margin:'0 auto'}}/>
     </Col>
   )
 } else {
     return(
       <Col s={12} style={{margin:'10px'}}>
-      <MediaBox src={this.props.photo.url_l} className="responsive-img" width="60%" style={{margin:'0 auto'}}/>
+      <MediaBox src={this.props.photo.url_l} className="responsive-img" width="60%" caption= {this.props.photo.ownername} style={{margin:'0 auto'}}/>
       </Col>
     )
   }
